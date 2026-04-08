@@ -7,22 +7,48 @@
   <meta name="description" content="What’s on in Dublin City Centre this week.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --accent:        #E8B8E2;
-      --accent-hover:  #D09CCB;
-      --accent-light:  #F3E4F0;
-      --dark:          #2A3640;
-      --base:          #F7F4F6;
-      --neutral:       #7A8389;
-      --card-bg:       #FFFFFF;
-      --card-tint:     color-mix(in srgb, var(--accent-light) 25%, white);
-      --card-border:   rgba(30,30,30,0.07);
-      --footer-bg:     #1E2830;
-      --footer-text:   #B8B0BE;
-      --footer-muted:  #5A5860;
+      /* ── BRAND IDENTITY ─────────────────────────────────── */
+      --accent:           #9B5FA5;
+      --accent-hover:     #834D8C;
+      --accent-light:     #D8B8DC;
+
+      /* ── INK & GROUND ───────────────────────────────────── */
+      --dark:             #2A3640;
+      --base:             #F7F4F6;
+
+      /* ── FULL TEXT SCALE ─────────────────────────────────── */
+      --body-text:        #2A3640;
+      --body-muted:       #4A555E;
+      --body-subtle:      #7A848C;
+      --divider:          rgba(42,54,64,0.10);
+
+      /* ── NEUTRAL ─────────────────────────────────────────── */
+      --neutral:          #6A727A;
+
+      /* ── CARD SURFACES ───────────────────────────────────── */
+      --card-bg:          #FDFBFE;
+      --card-tint:        #F4EEF6;
+      --card-border:      rgba(30,30,30,0.07);
+
+      /* ── ACCENT TINT SCALE ───────────────────────────────── */
+      --tint-strong:      #C8A0CC;
+      --tint-mid:         #DFCAE2;
+      --tint-soft:        #EFE3F1;
+
+      /* ── FOOTER ─────────────────────────────────────────── */
+      --footer-bg:        #1E2830;
+      --footer-text:      #B8B0BE;
+      --footer-muted:     #5A5860;
+
+      /* ── TYPOGRAPHY ─────────────────────────────────────── */
+      --font-display: 'Clash Display', system-ui, sans-serif;
       --font: 'DM Sans', system-ui, sans-serif;
+
+      /* ── RADII & SHADOWS ─────────────────────────────────── */
       --r-sm: 8px; --r-md: 12px; --r-lg: 16px;
       --sh-sm: 0 2px 10px rgba(0,0,0,0.06);
       --sh-md: 0 6px 24px rgba(0,0,0,0.12);
@@ -30,6 +56,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { font-family: var(--font); background: var(--base); color: var(--dark); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    .hero-title, .hero-kicker, h1, h2, .section-heading { font-family: var(--font-display); }
     .hero { position: relative; min-height: 500px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; background: url('hero.jpg') center 40% / cover no-repeat; }
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(8,6,4,0.10) 0%, rgba(8,6,4,0.30) 35%, rgba(8,6,4,0.76) 100%); }
     .hero-inner { position: relative; z-index: 2; max-width: 860px; margin: 0 auto; width: 100%; padding: 48px 32px 60px; }
@@ -53,7 +80,7 @@
     .cat-section { margin-bottom: 56px; animation: fadeUp 0.45s ease both; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);} }
     .cat-section:nth-child(1){animation-delay:0.05s;} .cat-section:nth-child(2){animation-delay:0.10s;} .cat-section:nth-child(3){animation-delay:0.15s;} .cat-section:nth-child(4){animation-delay:0.20s;} .cat-section:nth-child(5){animation-delay:0.25s;} .cat-section:nth-child(6){animation-delay:0.30s;}
-    .cat-strip { background: linear-gradient(105deg, #2A3640 0%, #E8B8E2 100%); border-radius: var(--r-lg) var(--r-lg) 0 0; padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .cat-strip { background: linear-gradient(105deg, var(--dark) 0%, var(--accent) 100%); border-radius: var(--r-lg) var(--r-lg) 0 0; padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; }
     .cat-strip-left { display: flex; align-items: center; gap: 12px; }
     .cat-bar { width: 3px; height: 26px; background: rgba(255,255,255,0.7); border-radius: 2px; flex-shrink: 0; }
     .cat-name { font-size: 17px; font-weight: 800; text-transform: uppercase; letter-spacing: -0.2px; color: #fff; }
@@ -78,8 +105,8 @@
     .more-link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--dark); text-decoration: none; white-space: nowrap; transition: gap 0.15s; opacity: 0.6; }
     .more-link:hover { gap: 7px; }
     .site-footer { background: var(--footer-bg); position: relative; overflow: hidden; }
-    .site-footer::before { content: ''; position: absolute; top: -120px; left: -100px; width: 480px; height: 480px; background: radial-gradient(circle, rgba(232,128,74,0.10) 0%, transparent 65%); pointer-events: none; }
-    .site-footer::after { content: ''; position: absolute; bottom: -80px; right: -80px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(232,128,74,0.06) 0%, transparent 65%); pointer-events: none; }
+    .site-footer::before { content: ''; position: absolute; top: -120px; left: -100px; width: 480px; height: 480px; background: radial-gradient(circle, rgba(155,95,165,0.10) 0%, transparent 65%); pointer-events: none; }
+    .site-footer::after { content: ''; position: absolute; bottom: -80px; right: -80px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(155,95,165,0.06) 0%, transparent 65%); pointer-events: none; }
     .footer-inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 64px 32px 40px; }
     .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 28px; }
     .footer-brand { font-size: 36px; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; color: #fff; line-height: 0.95; margin-bottom: 14px; }
