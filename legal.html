@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal — Third Castle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent: #E8B8E2;
+      --dark: #2A3640;
+      --base: #F7F4F6;
+      --text: #2A3640;
+      --text-muted: #6B7078;
+      --border: #E0DCE0;
+      --max-width: 680px;
+    }
+    html { font-size: 16px; }
+    body { background: var(--base); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; min-height: 100vh; }
+    .site-header { border-bottom: 1px solid var(--border); padding: 24px; }
+    .site-header-inner { max-width: var(--max-width); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .site-name { font-family: 'Clash Display', sans-serif; font-weight: 500; font-size: 1.1rem; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
+    .site-area { font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.04em; text-transform: uppercase; }
+    .page-intro { border-bottom: 1px solid var(--border); padding: 48px 24px 40px; }
+    .page-intro-inner { max-width: var(--max-width); margin: 0 auto; }
+    .page-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+    .page-title { font-family: 'Clash Display', sans-serif; font-weight: 500; font-size: 2rem; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 16px; color: var(--text); }
+    .page-meta { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .page-meta strong { color: var(--text); font-weight: 500; }
+    .doc-nav { border-bottom: 1px solid var(--border); padding: 0 24px; position: sticky; top: 0; background: var(--base); z-index: 10; }
+    .doc-nav-inner { max-width: var(--max-width); margin: 0 auto; display: flex; }
+    .doc-nav a { font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 14px 20px 13px; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; display: block; }
+    .doc-nav a:hover { color: var(--text); }
+    .doc-nav a.active { color: var(--text); border-bottom-color: var(--text); }
+    main { padding: 0 24px 80px; }
+    .doc-section { max-width: var(--max-width); margin: 0 auto; padding-top: 56px; }
+    .section-title { font-family: 'Clash Display', sans-serif; font-weight: 500; font-size: 1.4rem; letter-spacing: -0.015em; color: var(--text); margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .clause { margin-bottom: 36px; }
+    .clause h3 { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    .clause p { font-size: 0.9rem; color: var(--text); line-height: 1.75; margin-bottom: 10px; }
+    .clause p:last-child { margin-bottom: 0; }
+    .clause ul { list-style: none; padding: 0; margin: 0; }
+    .clause ul li { font-size: 0.9rem; color: var(--text); line-height: 1.75; padding: 5px 0 5px 18px; position: relative; }
+    .clause ul li::before { content: ''; position: absolute; left: 0; top: 14px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+    .info-box { background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px; padding: 16px 20px; margin-bottom: 36px; font-size: 0.875rem; line-height: 1.65; color: var(--text); }
+    .info-box strong { font-weight: 500; display: block; margin-bottom: 4px; }
+    .rights-grid { display: grid; gap: 12px; margin-bottom: 24px; }
+    .right-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; }
+    .right-item h4 { font-size: 0.8rem; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+    .right-item p { font-size: 0.825rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
+    .processor-list { display: grid; gap: 10px; margin-bottom: 12px; }
+    .processor { display: flex; align-items: flex-start; gap: 14px; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; }
+    .processor-name { font-size: 0.8rem; font-weight: 500; color: var(--text); min-width: 80px; padding-top: 1px; }
+    .processor-desc { font-size: 0.825rem; color: var(--text-muted); line-height: 1.55; }
+    .processor-desc a { color: var(--text-muted); text-decoration: underline; text-underline-offset: 2px; }
+    .doc-divider { max-width: var(--max-width); margin: 56px auto 0; border: none; border-top: 1px solid var(--border); }
+    a { color: var(--text); text-decoration: underline; text-underline-offset: 2px; }
+    .site-footer { border-top: 1px solid var(--border); padding: 24px; margin-top: 24px; }
+    .site-footer-inner { max-width: var(--max-width); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-company { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+    .footer-back { font-size: 0.8rem; color: var(--text-muted); text-decoration: none; }
+    .footer-back:hover { color: var(--text); }
+    @media (max-width: 600px) { .page-title { font-size: 1.6rem; } .site-header-inner { flex-direction: column; align-items: flex-start; gap: 4px; } .doc-nav a { padding: 14px 14px 13px; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="https://thirdcastle.ie" class="site-name">Third Castle</a>
+      <span class="site-area">Dublin City Centre</span>
+    </div>
+  </header>
+  <div class="page-intro">
+    <div class="page-intro-inner">
+      <div class="page-label">Legal</div>
+      <h1 class="page-title">Terms &amp; Privacy Policy</h1>
+      <p class="page-meta">
+        Published by <strong>Sparch Media Limited</strong> · CRO No. 812448<br>
+        3 Northumberland Park, Dún Laoghaire, County Dublin, Ireland, A96 A568<br>
+        Last updated: 7 May 2026
+      </p>
+    </div>
+  </div>
+  <nav class="doc-nav" aria-label="Document sections">
+    <div class="doc-nav-inner">
+      <a href="#terms" class="active" onclick="setActive(this)">Terms &amp; Conditions</a>
+      <a href="#privacy" onclick="setActive(this)">Privacy Policy</a>
+    </div>
+  </nav>
+  <main>
+    <section class="doc-section" id="terms">
+      <h2 class="section-title">Terms &amp; Conditions</h2>
+      <div class="clause">
+        <h3>About Third Castle</h3>
+        <p>Third Castle is a free weekly email newsletter covering events, culture, and local happenings in Dublin City Centre. It is published by Sparch Media Limited, a private company limited by shares incorporated in Ireland (CRO No. 812448), having its registered office at 3 Northumberland Park, Dún Laoghaire, County Dublin, Ireland, A96 A568.</p>
+        <p>By subscribing to Third Castle, you agree to these Terms. If you do not agree, please do not subscribe.</p>
+        <p>Questions: <a href="mailto:andy@mail.thirdcastle.ie">andy@mail.thirdcastle.ie</a></p>
+      </div>
+      <div class="clause">
+        <h3>Subscription</h3>
+        <p>Third Castle is free to subscribe. You can subscribe by completing the sign-up form and confirming your subscription via our double opt-in email. By subscribing, you confirm you have the right to use the email address provided. If you are under 16, you confirm that you have parental or guardian consent to subscribe.</p>
+        <p>We reserve the right to introduce paid tiers or premium features in future. Existing free subscribers will be notified in advance of any changes that affect them.</p>
+      </div>
+      <div class="clause">
+        <h3>Content accuracy</h3>
+        <p>We make reasonable efforts to ensure all information in Third Castle is accurate and up to date. However:</p>
+        <ul>
+          <li>Event details — dates, times, venues, and prices — may change after we publish</li>
+          <li>We do not control third-party events or venues and cannot be held responsible for cancellations, modifications, or inaccuracies</li>
+          <li>We recommend confirming event details directly with organisers before attending</li>
+        </ul>
+      </div>
+      <div class="clause">
+        <h3>Sponsored content &amp; advertising</h3>
+        <p>Third Castle may include sponsored content, display advertising, or affiliate links. All sponsored content will be clearly labelled. Inclusion of an advertiser does not constitute an endorsement. We are not responsible for products or services offered by advertisers.</p>
+      </div>
+      <div class="clause">
+        <h3>Intellectual property</h3>
+        <p>All original content in Third Castle is owned by Sparch Media Limited. You may read, forward, and share individual items for personal, non-commercial purposes with appropriate attribution. You may not reproduce or republish content in bulk without our written permission.</p>
+        <p>Some content (event descriptions, images) may be sourced from or belong to third parties. If you believe content infringes your rights, contact us at <a href="mailto:andy@mail.thirdcastle.ie">andy@mail.thirdcastle.ie</a>.</p>
+      </div>
+      <div class="clause">
+        <h3>Unsubscribing</h3>
+        <p>You can unsubscribe at any time by clicking the unsubscribe link at the bottom of any email, or by emailing <a href="mailto:andy@mail.thirdcastle.ie">andy@mail.thirdcastle.ie</a>. Unsubscribing is immediate, though you may receive one further email if one was already scheduled.</p>
+      </div>
+      <div class="clause">
+        <h3>Limitation of liability</h3>
+        <p>Third Castle is provided "as is" without warranties of any kind. To the maximum extent permitted by Irish law:</p>
+        <ul>
+          <li>We are not liable for any indirect, incidental, or consequential damages arising from your use of Third Castle</li>
+          <li>We are not responsible for errors in event information provided by third parties</li>
+          <li>We are not liable for loss or damage resulting from clicking links to external websites</li>
+          <li>We do not organise, host, or control the events featured — attendance is at your own risk</li>
+          <li>Our total liability shall not exceed €50, or the amount paid by you for the service (currently €0)</li>
+        </ul>
+      </div>
+      <div class="clause">
+        <h3>External links</h3>
+        <p>Third Castle contains links to external websites, ticketing platforms, and third-party services. We are not responsible for the content or privacy practices of those sites.</p>
+      </div>
+      <div class="clause">
+        <h3>Changes to these terms</h3>
+        <p>We may update these Terms from time to time. The date at the top of this page reflects the most recent update. For material changes, we will notify subscribers by email. Continued use of Third Castle after any update constitutes acceptance of the revised Terms.</p>
+      </div>
+      <div class="clause">
+        <h3>Governing law</h3>
+        <p>These Terms are governed by the laws of Ireland. Any disputes shall be subject to the jurisdiction of the courts of Ireland. If you are a consumer in the European Union, you may also have rights under EU consumer protection law.</p>
+      </div>
+    </section>
+    <hr class="doc-divider" />
+    <section class="doc-section" id="privacy">
+      <h2 class="section-title">Privacy Policy</h2>
+      <div class="info-box">
+        <strong>Data Controller</strong>
+        Sparch Media Limited · CRO No. 812448 · 3 Northumberland Park, Dún Laoghaire, County Dublin, Ireland, A96 A568<br>
+        Contact: <a href="mailto:andy@mail.thirdcastle.ie">andy@mail.thirdcastle.ie</a>
+      </div>
+      <div class="clause">
+        <h3>What we collect</h3>
+        <p>When you subscribe to Third Castle, we collect:</p>
+        <ul>
+          <li>Your email address</li>
+          <li>Your first name (if provided)</li>
+          <li>Basic engagement data — whether you open emails and which links you click (collected by Beehiiv)</li>
+          <li>Your IP address at the time of subscription (collected by Beehiiv)</li>
+        </ul>
+        <p>We do not collect payment information, sensitive personal data, or data from children under 16 without parental consent.</p>
+      </div>
+      <div class="clause">
+        <h3>Legal basis for processing</h3>
+        <p>We process your personal data on the basis of your consent (GDPR Article 6(1)(a)), given when you subscribed via our double opt-in process. You can withdraw consent at any time by unsubscribing.</p>
+        <p>We may also process data under legitimate interests (Article 6(1)(f)) to understand our audience and improve our content.</p>
+      </div>
+      <div class="clause">
+        <h3>How we use your data</h3>
+        <p>We use your data to deliver Third Castle to your inbox, analyse engagement to improve content, and respond to your queries. We will never sell your data or share it with third parties for their marketing purposes.</p>
+      </div>
+      <div class="clause">
+        <h3>Who we share your data with</h3>
+        <div class="processor-list">
+          <div class="processor">
+            <span class="processor-name">Beehiiv</span>
+            <span class="processor-desc">Our email platform, which manages subscribers and delivers emails. Based in the United States — transfers are protected by Standard Contractual Clauses approved by the European Commission. <a href="https://www.beehiiv.com/privacy" target="_blank" rel="noreferrer">Privacy policy ↗</a></span>
+          </div>
+          <div class="processor">
+            <span class="processor-name">Meta</span>
+            <span class="processor-desc">Where we run paid promotions to grow the newsletter. <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noreferrer">Privacy policy ↗</a></span>
+          </div>
+          <div class="processor">
+            <span class="processor-name">Google</span>
+            <span class="processor-desc">Website analytics, if and when implemented. <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">Privacy policy ↗</a></span>
+          </div>
+        </div>
+        <p>We do not sell your data to any third party.</p>
+      </div>
+      <div class="clause">
+        <h3>Data retention</h3>
+        <p>We retain your data for as long as you remain subscribed. If you unsubscribe, your data is removed from our active list. Beehiiv may retain your email address in a suppression list to prevent accidental re-subscription, in accordance with their data retention policy.</p>
+      </div>
+      <div class="clause">
+        <h3>International transfers</h3>
+        <p>Your data may be transferred to and processed in countries outside the EEA, including the United States (where Beehiiv is based). These transfers are protected by Standard Contractual Clauses approved by the European Commission.</p>
+      </div>
+      <div class="clause">
+        <h3>Security</h3>
+        <p>We take appropriate technical and organisational measures to protect your data, including encrypted transmission (HTTPS/TLS) and access controls. No method of internet transmission is 100% secure, but we use reputable service providers with strong security practices.</p>
+      </div>
+      <div class="clause">
+        <h3>Cookies &amp; tracking</h3>
+        <p>Beehiiv uses tracking pixels in emails to detect opens and link clicks. Our events page at <a href="https://events.thirdcastle.ie">events.thirdcastle.ie</a> may use analytics cookies. You can disable cookies in your browser settings at any time.</p>
+      </div>
+      <div class="clause">
+        <h3>Your rights under GDPR</h3>
+        <div class="rights-grid">
+          <div class="right-item"><h4>Access</h4><p>Request a copy of the personal data we hold about you.</p></div>
+          <div class="right-item"><h4>Rectification</h4><p>Ask us to correct inaccurate or incomplete information.</p></div>
+          <div class="right-item"><h4>Erasure</h4><p>Request deletion of your personal data by unsubscribing or emailing us.</p></div>
+          <div class="right-item"><h4>Restriction</h4><p>Ask us to limit how we use your data in certain circumstances.</p></div>
+          <div class="right-item"><h4>Portability</h4><p>Request your data in a structured, machine-readable format.</p></div>
+          <div class="right-item"><h4>Withdraw consent</h4><p>Unsubscribe at any time via the link in any email.</p></div>
+        </div>
+        <p>To exercise any of these rights, contact us at <a href="mailto:andy@mail.thirdcastle.ie">andy@mail.thirdcastle.ie</a>. We will respond within one month as required by GDPR.</p>
+        <p>You also have the right to lodge a complaint with the <a href="https://www.dataprotection.ie" target="_blank" rel="noreferrer">Data Protection Commission (Ireland)</a>.</p>
+      </div>
+      <div class="clause">
+        <h3>Children's privacy</h3>
+        <p>We do not knowingly collect personal data from children under 16 without parental consent. If you believe your child has subscribed without your consent, please contact us at <a href="mailto:andy@mail.thirdcastle.ie">andy@mail.thirdcastle.ie</a>.</p>
+      </div>
+      <div class="clause">
+        <h3>Changes to this policy</h3>
+        <p>We may update this policy from time to time. The date at the top of this page reflects the most recent update. For significant changes, we will notify subscribers by email.</p>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="footer-company">Sparch Media Limited · CRO No. 812448<br>3 Northumberland Park, Dún Laoghaire, County Dublin, Ireland</div>
+      <a href="https://events.thirdcastle.ie" class="footer-back">← Events page</a>
+    </div>
+  </footer>
+  <script>
+    function setActive(el) { document.querySelectorAll('.doc-nav a').forEach(a => a.classList.remove('active')); el.classList.add('active'); }
+    const sections = document.querySelectorAll('.doc-section');
+    const navLinks = document.querySelectorAll('.doc-nav a');
+    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { const id = entry.target.id; navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + id); }); } }); }, { rootMargin: '-30% 0px -60% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
