@@ -1,0 +1,53 @@
+name: Refresh event images
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: third-castle-event-images
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: automation/requirements-images.txt
+      - name: Install deterministic image lane
+        run: pip install --requirement automation/requirements-images.txt
+      - name: Run image-lane regression tests
+        run: python -m unittest discover -s automation/tests -p "test_*.py"
+      - name: Test fail-closed image gateway rules
+        run: node --test worker/tests/*.test.mjs
+      - name: Prepare read-only Sheets credentials
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          credential_path="$RUNNER_TEMP/google-service-account.json"
+          printf '%s' "$GOOGLE_SERVICE_ACCOUNT_JSON" > "$credential_path"
+          echo "GOOGLE_SHEETS_KEY_FILE=$credential_path" >> "$GITHUB_ENV"
+      - name: Enrich and publish images
+        env:
+          THIRD_CASTLE_SHEET_ID: ${{ secrets.THIRD_CASTLE_SHEET_ID }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_PUBLIC_BASE_URL: ${{ secrets.R2_PUBLIC_BASE_URL }}
+        run: python automation/run_event_image_enrichment.py --publish --output "$RUNNER_TEMP/event-image-manifest.json"
+      - name: Retain diagnostic manifest on failures and successful runs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: event-image-manifest
+          path: ${{ runner.temp }}/event-image-manifest.json
+          if-no-files-found: ignore
+          retention-days: 14

@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "third-castle-image-gateway",
+  "main": "src/index.mjs",
+  "compatibility_date": "2026-08-28",
+  "r2_buckets": [
+    {
+      "binding": "EVENT_IMAGES",
+      "bucket_name": "third-castle-event-images"
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "media.events.thirdcastle.ie",
+      "custom_domain": true
+    }
+  ]
+}
