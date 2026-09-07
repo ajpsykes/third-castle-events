@@ -105,6 +105,39 @@ class ImageEnrichmentTests(unittest.TestCase):
         self.assertFalse(manifest["featured_selection"]["valid"])
         self.assertEqual(manifest["featured_selection"]["count"], 5)
 
+    def test_shared_url_keeps_event_metadata_and_feature_state_separate(self):
+        events = [
+            {
+                "title": "Featured event", "date": "2026-09-11", "venue": "Venue A",
+                "url": "https://example.com/whats-on", "editorial_feature": True,
+            },
+            {
+                "title": "Regular event", "date": "2026-09-12", "venue": "Venue B",
+                "url": "https://example.com/whats-on", "editorial_feature": False,
+            },
+        ]
+
+        def fake_audit(group, _pacer, _timeout, thumbnail_dir):
+            asset = "shared.webp"
+            (thumbnail_dir / asset).write_bytes(b"webp")
+            return AuditResult(
+                url=group["url"], event_ids=group["event_ids"], title=group["title"],
+                venue=group["venue"], status="usable-candidate", asset_name=asset,
+                asset_kind="event", discovery="test", image_url="https://images.example/a.jpg",
+            )
+
+        with patch("sparch_event_images.audit_page", side_effect=fake_audit):
+            manifest = enrich_events(events, workers=1)
+
+        self.assertEqual(manifest["unique_urls_checked"], 1)
+        self.assertEqual(manifest["featured_selection"]["count"], 1)
+        self.assertTrue(manifest["featured_selection"]["valid"])
+        self.assertEqual(
+            [(record["title"], record["venue"], record["editorial_feature"])
+             for record in manifest["records"]],
+            [("Featured event", "Venue A", True), ("Regular event", "Venue B", False)],
+        )
+
     def test_recent_manifest_reuses_image_without_network_fetch(self):
         event = {
             "title": "Wallis Bird", "date": "2026-09-04", "venue": "The Grand Social",
