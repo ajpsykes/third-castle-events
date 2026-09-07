@@ -34,6 +34,19 @@ def join_key(title, date, venue) -> str:
     return "\x1f".join(str(value or "").strip().casefold() for value in (title, date, venue))
 
 
+def has_event_data(row: dict) -> bool:
+    """Ignore rows made non-empty only by an unchecked checkbox.
+
+    Google Sheets returns an unchecked checkbox as the string ``FALSE``. The
+    Master tab intentionally carries checkbox validation beyond the populated
+    event rows, so row truthiness alone is not evidence that an event exists.
+    """
+    return any(
+        str(row.get(field, "") or "").strip()
+        for field in ("Title", "Date", "Venue", "URL")
+    )
+
+
 def rows_as_dicts(service, sheet_id: str, tab_range: str) -> list[dict]:
     response = service.spreadsheets().values().get(
         spreadsheetId=sheet_id,
@@ -78,6 +91,8 @@ def load_events(service, sheet_id: str, venue_manifest: Path) -> list[dict]:
 
     events = []
     for row in master:
+        if not has_event_data(row):
+            continue
         event = {
             "title": row.get("Title", ""),
             "date": row.get("Date", ""),
