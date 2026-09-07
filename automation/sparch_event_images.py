@@ -464,22 +464,23 @@ def group_events(events: list[dict]) -> list[dict]:
         group = groups.setdefault(url, {
             "url": url,
             "event_ids": [],
-            "event_keys": [],
+            "events": [],
             "title": str(event.get("title") or ""),
             "venue": str(event.get("venue") or ""),
             "image_url": str(event.get("image_url") or ""),
             "venue_image_url": str(event.get("venue_image_url") or ""),
-            "editorial_feature": False,
         })
         group["event_ids"].append(str(event.get("id") or ""))
-        group["event_keys"].append(canonical_event_key(event))
+        group["events"].append({
+            "event_key": canonical_event_key(event),
+            "title": str(event.get("title") or ""),
+            "venue": str(event.get("venue") or ""),
+            "editorial_feature": bool(event.get("editorial_feature")),
+        })
         if not group["image_url"] and event.get("image_url"):
             group["image_url"] = str(event["image_url"])
         if not group["venue_image_url"] and event.get("venue_image_url"):
             group["venue_image_url"] = str(event["venue_image_url"])
-        group["editorial_feature"] = bool(
-            group["editorial_feature"] or event.get("editorial_feature")
-        )
     return list(groups.values())
 
 
@@ -685,12 +686,17 @@ def enrich_events(
                         )
                     asset_url = uploaded_assets[result.asset_name]
 
-            event_keys = group.get("event_keys") or [""]
-            for event_key in event_keys:
+            grouped_events = group.get("events") or [{
+                "event_key": "",
+                "title": result.title,
+                "venue": result.venue,
+                "editorial_feature": False,
+            }]
+            for event in grouped_events:
                 records.append({
-                    "event_key": event_key,
-                    "title": result.title,
-                    "venue": result.venue,
+                    "event_key": event["event_key"],
+                    "title": event["title"],
+                    "venue": event["venue"],
                     "page_url": result.url,
                     "status": result.status,
                     "reason": result.reason,
@@ -705,7 +711,7 @@ def enrich_events(
                     "source_bytes": result.source_bytes,
                     "webp_bytes": result.webp_bytes,
                     "cached": result.cached,
-                    "editorial_feature": bool(group.get("editorial_feature")),
+                    "editorial_feature": bool(event["editorial_feature"]),
                     "checked_at": result.checked_at or checked_at.isoformat(timespec="seconds"),
                     "expires_at": result.expires_at or (checked_at + timedelta(days=90)).isoformat(timespec="seconds"),
                 })
