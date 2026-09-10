@@ -320,6 +320,16 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:4
 .empty p{margin-top:10px;color:var(--muted);font-size:.94rem}
 
 /* ── footer ────────────────────────────────────────────────── */
+/* archive banner — only ever rendered on a dated archive copy, so a reader who
+   lands on one from search knows immediately it is not this week */
+.arch-note{position:relative;z-index:60;background:var(--bg-3);
+  border-bottom:1px solid var(--line);padding:11px 24px;text-align:center;
+  font-family:var(--sans);font-size:.86rem;color:var(--muted)}
+.arch-note b{color:var(--ink);font-weight:500}
+.arch-note a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);
+  padding-bottom:1px;margin-left:8px;white-space:nowrap}
+.arch-note a:hover{border-bottom-color:var(--ink)}
+@media(max-width:600px){.arch-note{font-size:.8rem;padding:10px 16px}}
 .marq{margin-top:clamp(70px,10vw,140px);padding-block:clamp(30px,4vw,52px);
   border-block:1px solid var(--line);overflow:hidden}
 /* the fade belongs to the moving text, not to the band it sits on — masking the
