@@ -523,10 +523,13 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:4
     if(rcNum){rcNum.textContent=shown; rcWord.textContent=shown===1?'event':'events'}
     if(none) none.hidden=any;
     if(reset) reset.hidden=!(days.size||cats.size);
-    var p=new URLSearchParams();
-    if(days.size)p.set('day',Array.from(days).join(','));
-    if(cats.size)p.set('cat',Array.from(cats).join(','));
-    var q=p.toString(); history.replaceState(null,'',q?'?'+q:location.pathname);
+    // Keep campaign attribution in the address while changing only the
+    // day/category filter parameters owned by this page.
+    var p=new URLSearchParams(location.search);
+    if(days.size)p.set('day',Array.from(days).join(',')); else p.delete('day');
+    if(cats.size)p.set('cat',Array.from(cats).join(',')); else p.delete('cat');
+    var q=p.toString();
+    history.replaceState(null,'',location.pathname+(q?'?'+q:'')+location.hash);
   }
   function tog(set,v,b){ if(set.has(v)){set.delete(v);b.setAttribute('aria-pressed','false')}
     else{set.add(v);b.setAttribute('aria-pressed','true')} apply(); }
