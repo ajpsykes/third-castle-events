@@ -251,5 +251,6 @@
     const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { const id = entry.target.id; navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + id); }); } }); }, { rootMargin: '-30% 0px -60% 0px' });
     sections.forEach(s => observer.observe(s));
   </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "71362de21e0344f5b359a04f630039da"}'></script>
 </body>
 </html>
