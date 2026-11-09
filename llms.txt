@@ -1,0 +1,19 @@
+# Third Castle: what's on in Dublin
+
+> Third Castle publishes a free weekly list of events in Dublin: live music, food and drink, arts and culture, family days and outdoor events. This site holds the current week's list, updated weekly, and an archive of past weeks. It is published by Sparch Media Limited.
+
+Current week: Tue 10 – Tue 17 Nov 2026, 233 events. Times and details can change, so check with the venue.
+
+## This week
+
+- [What's on in Dublin this week](https://events.thirdcastle.ie/): the full list, grouped by day
+- [Plain-text version](https://events.thirdcastle.ie/this-week.txt): the same events as plain text, with links
+
+## Past weeks
+
+- [Archive index](https://events.thirdcastle.ie/archive): 26 earlier weekly editions
+
+## About
+
+- [Third Castle newsletter](https://www.thirdcastle.ie): the free weekly email
+- [Sitemap](https://events.thirdcastle.ie/sitemap.xml): every page on this site
