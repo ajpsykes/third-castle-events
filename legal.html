@@ -81,7 +81,7 @@
       <p class="page-meta">
         Published by <strong>Sparch Media Limited</strong> · CRO No. 812448<br>
         3 Northumberland Park, Dún Laoghaire, County Dublin, Ireland, A96 A568<br>
-        Last updated: 22 September 2026
+        Last updated: 11 November 2026
       </p>
     </div>
   </div>
@@ -195,16 +195,20 @@
             <span class="processor-name">Cloudflare</span>
             <span class="processor-desc">Site delivery, privacy-preserving website analytics, and secure hosting for the Meta-to-Beehiiv routing service. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noreferrer">Privacy policy ↗</a></span>
           </div>
+          <div class="processor">
+            <span class="processor-name">Google</span>
+            <span class="processor-desc">Hosts the Google spreadsheet that receives your Meta lead-form details from Meta (your email address and the form identifiers) and runs the small script that passes your email address to Beehiiv. <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">Privacy policy ↗</a></span>
+          </div>
         </div>
         <p>We do not sell your data to any third party.</p>
       </div>
       <div class="clause">
         <h3>Data retention</h3>
-        <p>Beehiiv retains your subscriber record while you remain subscribed. If you unsubscribe, you are removed from active sends; Beehiiv may retain a suppression record to prevent accidental reactivation. The routing service keeps an encrypted email only while a failed Beehiiv creation is retryable, for no more than 24 hours, and then deletes it. Pseudonymous routing and status records are deleted after 90 days.</p>
+        <p>Beehiiv retains your subscriber record while you remain subscribed. If you unsubscribe, you are removed from active sends; Beehiiv may retain a suppression record to prevent accidental reactivation. The routing service keeps an encrypted email only while a failed Beehiiv creation is retryable, for no more than 24 hours, and then deletes it. If you sign up through a Meta lead form, your lead is delivered to our Google spreadsheet, where your email address (and first name, if provided) is kept for no more than 30 days and then cleared. Pseudonymous routing and status records, and the matching spreadsheet rows, are deleted after 90 days.</p>
       </div>
       <div class="clause">
         <h3>International transfers</h3>
-        <p>Beehiiv, Cloudflare and Meta may process data outside the EEA. We use the contractual and international-transfer safeguards applicable to each service and review those arrangements as part of our supplier checks. Contact us if you would like more information about the safeguards relevant to your data.</p>
+        <p>Beehiiv, Cloudflare, Meta and Google may process data outside the EEA. We use the contractual and international-transfer safeguards applicable to each service and review those arrangements as part of our supplier checks. Contact us if you would like more information about the safeguards relevant to your data.</p>
       </div>
       <div class="clause">
         <h3>Security</h3>
@@ -251,6 +255,5 @@
     const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { const id = entry.target.id; navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + id); }); } }); }, { rootMargin: '-30% 0px -60% 0px' });
     sections.forEach(s => observer.observe(s));
   </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "71362de21e0344f5b359a04f630039da"}'></script>
 </body>
 </html>
