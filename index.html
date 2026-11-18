@@ -280,7 +280,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:4
    scrim is deliberately heavier than this photo needs — it has to win over
    an unknown image, and make_templates checks that it does. */
 .spx{position:relative;border:1px solid var(--line);border-radius:20px;overflow:hidden;
-  background:var(--bg-2);margin-bottom:4px}
+  background:var(--bg-2);margin-top:clamp(28px,4vw,44px);margin-bottom:4px}
 /* the photo is absolutely positioned, so the scrim and words must be
    positioned too or the image paints straight over them */
 .spx-scrim,.spx-body{position:relative}
@@ -290,7 +290,13 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:4
   display:block;line-height:1.08;font-size:1.95rem}
 .spx-copy{margin-top:9px;color:var(--muted);font-size:.95rem;line-height:1.55;max-width:46ch}
 .spx-foot{margin-top:18px}
-.spx-cta{white-space:nowrap}
+/* The markup gives the CTA .btn but no size class, so it had no padding at all.
+   It is sized and filled here (the page's primary button: ink on ground) rather
+   than in the markup, so pages already published pick it up from the CSS alone. */
+.spx .spx-cta{white-space:nowrap;padding:13px 26px;font-size:.92rem;background:var(--ink);color:var(--bg);
+  border-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+.spx .spx-cta:hover{background:#fff;border-color:transparent;transform:translateY(-1px);
+  box-shadow:0 10px 30px -10px rgba(246,242,237,.4)}
 .spx-over{min-height:260px;display:grid}
 .spx-over .spx-ph{grid-area:1/1;position:relative}
 .spx-over .spx-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -302,14 +308,30 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:4
    by only ~0.2 on a white image, so the overlay lifts its text rather than
    darkening the scrim further and hiding the sponsor's picture. */
 .spx-over .spx-eyebrow,.spx-over .spx-copy{color:rgba(246,242,237,.82)}
-/* no photo, or none booked: the same block without the image */
-.spx-house{padding:26px 30px}
-.spx-house .spx-name{font-size:1.5rem}
-.spx-house:not(.spx-over){border-style:dashed;background:transparent}
+/* no photo, or none booked: a banner in the title's own colour, words left and
+   the button right. Every text colour here is measured against the real pixels
+   of the gradient on all five palettes (AA at 320px to 1920px). */
+.spx-house{padding:32px 36px}
+.spx-house .spx-body{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:36px}
+.spx-house .spx-body > *{grid-column:1}
+.spx-house .spx-foot{grid-column:2;grid-row:1/span 3;margin-top:0}
+.spx-house:not(.spx-over){border-color:color-mix(in srgb,var(--accent) 50%,transparent);
+  background:
+    radial-gradient(70% 170% at 100% 0%,color-mix(in srgb,var(--accent) 78%,transparent) 0%,transparent 64%),
+    linear-gradient(100deg,color-mix(in srgb,var(--accent) 30%,#000) 0%,color-mix(in srgb,var(--accent) 44%,#000) 100%)}
+.spx-house:not(.spx-over) .spx-eyebrow{color:var(--glow)}
+.spx-house:not(.spx-over) .spx-copy{color:rgba(246,242,237,.82)}
 @media(max-width:860px){
   .spx-over .spx-body{max-width:none;padding:24px 20px}
   .spx-name{font-size:1.5rem}
-  .spx-house{padding:20px 18px}
+  .spx-house{padding:24px 20px}
+  .spx-house .spx-body{display:block}
+  .spx-house .spx-foot{margin-top:18px}
+  /* stacked on a phone the words run under the glow, so it is pulled into the corner */
+  .spx-house:not(.spx-over){background:
+    radial-gradient(75% 85% at 100% 0%,color-mix(in srgb,var(--accent) 52%,transparent) 0%,transparent 70%),
+    linear-gradient(100deg,color-mix(in srgb,var(--accent) 30%,#000) 0%,color-mix(in srgb,var(--accent) 40%,#000) 100%)}
+  .spx-house:not(.spx-over) .spx-copy{color:rgba(246,242,237,.9)}
 }
 
 .more{display:flex;justify-content:center;margin-top:44px}
