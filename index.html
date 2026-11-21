@@ -395,6 +395,20 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:4
   [data-r]{opacity:1!important;transform:none!important;filter:none!important}
   *{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
+
+/* sign-up (PG9): our own button; Beehiiv's form, and its cookies, load only on a tap */
+.su-hero .hero-cta{margin-top:40px}
+.su-fine{margin-top:14px;font-size:.86rem;line-height:1.5;color:rgba(246,242,237,.9);max-width:46ch}
+.su-fine a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.su-panel{margin-top:26px;width:min(560px,100%)}
+.su-panel[hidden],.su-fine[hidden],.su-fallback[hidden]{display:none}
+.su-slot{min-height:64px}
+/* the page is "dark light"; a frame whose scheme differs is painted opaque white, so match the form's own (light) */
+.su-slot iframe{max-width:100%;color-scheme:light}
+.su-fallback{margin-top:12px;font-size:.9rem;color:var(--ink)}
+.su-fallback a{text-decoration:underline;text-underline-offset:3px}
+.su-foot{display:flex;flex-direction:column;align-items:flex-start;flex:1 1 420px;max-width:560px;min-width:min(420px,100%)}
+.su-foot .su-fine{color:var(--muted)}
 </style>
 <style>
 .about{padding-block:56px 28px;border-top:1px solid var(--line)}
@@ -413,7 +427,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:4
 <nav class="nav">
   <a class="nav-mark" href="https://www.thirdcastle.ie">The Third Castle</a>
   <span class="nav-links"><a href="https://www.thirdcastle.ie">Newsletter</a><a href="https://www.thirdcastle.ie/archive">Archive</a></span>
-  <a class="btn btn-sm btn-fill" href="https://www.thirdcastle.ie">Subscribe</a>
+  <a class="btn btn-sm btn-fill" href="https://www.thirdcastle.ie" data-su-jump>Subscribe</a>
 </nav>
 
 <header class="hero">
@@ -424,9 +438,16 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:4
     <p class="eyeless" data-r>Tue 17 – Tue 24 Nov · 313 events</p>
     <h1 class="hero-h1" data-r>Dublin events<br>this week</h1>
     <p class="hero-sub" data-r>What’s on in Dublin, Tue 17 – Tue 24 Nov: 313 events and things to do. Pick a day or browse by mood.</p>
-    <div class="hero-cta" data-r>
-      <a class="btn btn-lg btn-fill" href="#main">Browse events</a>
-      <a class="btn btn-lg btn-glass" href="https://www.thirdcastle.ie">Get the weekly edit</a>
+    <div class="su su-hero" data-su data-form="1a64b703-c56f-46eb-881d-4d19bced54b8" data-r>
+      <div class="hero-cta">
+        <a class="btn btn-lg btn-fill" href="https://www.thirdcastle.ie" data-su-open aria-controls="su-hero-panel" aria-expanded="false">Get the weekly edit &mdash; free</a>
+        <a class="btn btn-lg btn-glass" href="#main">Browse events</a>
+      </div>
+      <div class="su-panel" id="su-hero-panel" hidden>
+        <div class="su-slot"></div>
+        <p class="su-fallback" hidden>Form not showing? <a href="https://www.thirdcastle.ie">Sign up on our newsletter page</a>.</p>
+      </div>
+      <p class="su-fine">Tapping opens Beehiiv&rsquo;s secure sign-up form, which sets its own cookies. <a href="https://events.thirdcastle.ie/legal" target="_blank" rel="noopener">Privacy</a></p>
     </div>
   </div>
 </header>
@@ -473,7 +494,14 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:4
         <a href="https://events.thirdcastle.ie/legal" target="_blank" rel="noopener">Terms</a>
         <a href="https://www.thirdcastle.ie">thirdcastle.ie</a>
       </div>
-      <a class="btn btn-lg btn-fill" href="https://www.thirdcastle.ie">Get the weekly edit — free</a>
+      <div class="su su-foot" data-su data-form="1a64b703-c56f-46eb-881d-4d19bced54b8">
+        <a class="btn btn-lg btn-fill" href="https://www.thirdcastle.ie" data-su-open aria-controls="su-foot-panel" aria-expanded="false">Get the weekly edit &mdash; free</a>
+        <div class="su-panel" id="su-foot-panel" hidden>
+          <div class="su-slot"></div>
+          <p class="su-fallback" hidden>Form not showing? <a href="https://www.thirdcastle.ie">Sign up on our newsletter page</a>.</p>
+        </div>
+        <p class="su-fine">Tapping opens Beehiiv&rsquo;s secure sign-up form, which sets its own cookies. <a href="https://events.thirdcastle.ie/legal" target="_blank" rel="noopener">Privacy</a></p>
+      </div>
     </div>
     <p class="foot-legal"><span>© 2026 The Third Castle</span>
       <span>Times and details can change. Check with the venue before you go.</span></p>
@@ -579,6 +607,36 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:4
     catB.forEach(function(b){if(cats.has(b.getAttribute('data-cat-val')))b.setAttribute('aria-pressed','true')});
   })();
   apply();
+
+  // sign-up: Beehiiv's form (and the cookies and tracker it brings) loads only when a visitor taps.
+  // Every button is a real link to the title's sign-up page, so this is an upgrade, not a dependency.
+  function suOpen(box){
+    var id=box.getAttribute('data-form'); if(!id) return false;
+    var btn=box.querySelector('[data-su-open]'), panel=box.querySelector('.su-panel'),
+        slot=box.querySelector('.su-slot'), fb=box.querySelector('.su-fallback'),
+        fine=box.querySelector('.su-fine');
+    if(!box.getAttribute('data-loaded')){
+      box.setAttribute('data-loaded','1');
+      var s=document.createElement('script'); s.async=true;
+      s.src='https://subscribe-forms.beehiiv.com/v3/loader.js';
+      s.setAttribute('data-beehiiv-form',id);
+      slot.appendChild(s);
+      setTimeout(function(){ if(fb && !slot.querySelector('iframe')) fb.hidden=false; },6000);
+    }
+    panel.hidden=false; btn.hidden=true; btn.setAttribute('aria-expanded','true'); if(fine) fine.hidden=true;
+    panel.scrollIntoView({behavior:rm?'auto':'smooth',block:'center'});
+    return true;
+  }
+  [].slice.call(document.querySelectorAll('[data-su-open]')).forEach(function(a){
+    a.addEventListener('click',function(e){
+      var box=a.closest('[data-su]'); if(box && box.getAttribute('data-form')){e.preventDefault(); suOpen(box)}
+    });
+  });
+  [].slice.call(document.querySelectorAll('[data-su-jump]')).forEach(function(a){
+    a.addEventListener('click',function(e){
+      var box=document.querySelector('.su-hero'); if(box && box.getAttribute('data-form')){e.preventDefault(); suOpen(box)}
+    });
+  });
 
   // progressive disclosure (variant A)
   var more=document.getElementById('showAll');
